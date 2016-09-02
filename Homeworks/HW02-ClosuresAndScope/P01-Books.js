@@ -24,11 +24,17 @@
  *	If something is not valid - throw Error
  */
 function solve() {
-    var library = (function () {
-        var books = [];
+
+    var library = function (bookList) {
+        var books = bookList;
         var categories = [];
         function listBooks() {
             return books;
+        }
+
+        function addCategory(categoryName) {
+            categories.push(categoryName);
+            return this;
         }
 
         function addBook(book) {
@@ -47,11 +53,19 @@ function solve() {
                 add: addBook
             },
             categories: {
-                list: listCategories
+                list: listCategories,
+                add: addCategory
             }
         };
-    } ());
+    } ;
+
+
+    var newLibrary = new library(['ivan','petkan','dragan']);
+
+    console.log(newLibrary.books.list());
 
 
     return library;
 }
+
+solve();
